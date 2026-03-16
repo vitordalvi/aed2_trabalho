@@ -1,6 +1,6 @@
 ﻿namespace aed2_trabalho.entities
 {
-    class Disciplina
+    public class Disciplina
     {
         // Unica
         private int CodigoDisciplina;

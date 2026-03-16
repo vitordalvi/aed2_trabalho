@@ -1,6 +1,6 @@
 ﻿namespace aed2_trabalho.entities
 {
-    class Aluno
+    public class Aluno
     {
         // Unica
         private int MatriculaAluno;
