@@ -8,7 +8,7 @@
             Console.WriteLine("CALCULAR RESULTADO DAS PROVAS DE ALUNOS - AEDII\n");
             Console.WriteLine("1 - Consultas (Alunos, Disciplinas, Alunos das Disciplinas, Disciplinas do Aluno)");
             Console.WriteLine("2 - Cadastros (Alunos, Disciplinas, Matrículas, Atribuir Nota e Aluno)");
-            Console.WriteLine("3 - Salvar e realizar outra operação");
+            Console.WriteLine("3 - Salvar e Realizar outra Operação");
             Console.WriteLine("0 - Salvar e Sair");
             Console.Write("Selecione uma das opções: ");
 
@@ -18,5 +18,6 @@
         {
             Console.WriteLine($"A opção selecionada foi: {ViewService.GetOpcao}");
         }
+
     }
 }

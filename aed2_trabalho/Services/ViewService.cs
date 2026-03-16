@@ -15,12 +15,11 @@ namespace aed2_trabalho.Services
         // Verificar opcao selecionada
         public static void OpcaoSelecionada(string op)
         {
-
             switch (op)
             {
                 case "0":
                     // implementar servico sair?
-                    Console.WriteLine("Serviço sair");
+                    Console.WriteLine("Serviço sair e sair");
                     break;
 
                     case "1":
@@ -35,7 +34,7 @@ namespace aed2_trabalho.Services
 
                     case "3":
                     // implementar servico salvar
-                    Console.WriteLine("servico salvar");
+                    Console.WriteLine("servico salvar e realizar outra operacao");
                     break;
 
                     default:
