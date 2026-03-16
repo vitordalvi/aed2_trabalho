@@ -2,8 +2,8 @@
 
 namespace aed2_trabalho.Repositories
 {
-    interface IAlunoRepository
+    public interface IAlunoRepository
     {
-        public Aluno CreteAluno(Aluno aluno);
+        public Aluno CreateAluno(Aluno aluno);
     }
 }

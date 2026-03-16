@@ -4,7 +4,7 @@ namespace aed2_trabalho.Repositories
 {
     class AlunoRepository : IAlunoRepository
     {
-        public Aluno CreteAluno(Aluno aluno)
+        public Aluno CreateAluno(Aluno aluno)
         {
             throw new NotImplementedException();
         }
