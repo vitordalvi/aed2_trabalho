@@ -1,6 +1,8 @@
-﻿namespace aed2_trabalho.entities
+﻿using aed2_trabalho.Entities;
+
+namespace aed2_trabalho.entities
 {
-    public class Disciplinas
+    public class Disciplinas : BaseEntity
     {
         // Unica
         private int CodigoDisciplina;
@@ -16,6 +18,8 @@
 
             disciplinaInicial++;
         }
+
+        public Disciplinas() { }
 
         public int GetCodigoDisciplina()
         {

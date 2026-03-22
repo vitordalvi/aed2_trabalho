@@ -18,6 +18,8 @@
             Nota2 = nota2;
         }
 
+        public Matriculas() { }
+
         public int GetCodigoDisciplina()
         {
             return CodigoDisciplina;

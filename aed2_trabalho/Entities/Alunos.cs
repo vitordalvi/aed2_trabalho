@@ -17,6 +17,8 @@
             matriculaInicial++;
         }
 
+        public Alunos() { }
+
         public int GetMatriculaAluno()
         {
             return MatriculaAluno;
@@ -40,6 +42,11 @@
         public void SetIdade(int idade)
         {
             Idade = idade;
+        }
+
+        public override string ToString()
+        {
+            return $"{MatriculaAluno}; {Nome}; {Idade}"; 
         }
     }
 }
