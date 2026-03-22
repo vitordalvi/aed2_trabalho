@@ -9,7 +9,7 @@ namespace aed2_trabalho.Data
         // Caminhos dos arquivos .dat
         static string basePath = AppContext.BaseDirectory;
         static string dbFolderPath = "Data/db";
-        static string[] dbPaths = new string[3]
+        public static string[] dbPaths = new string[3]
         {
             $"{basePath}/Data/db/Alunos.dat",
             $"{basePath}/Data/db/Matriculas.dat",
@@ -39,31 +39,9 @@ namespace aed2_trabalho.Data
 
                 // Se não existir, cria o arquivo que está faltando
                 File.CreateText(dbPaths[i]);
-
-                // Cria o vetor que vai conter os objetos de acordo com seus tipos
-                InitializeData(missingEntity);
             }
         }
         
-        // Criação dos vetores que conterão os objetos
-        public static void InitializeData(string type)
-        {
-            switch (type)
-            {
-                case "Matriculas":
-                    Matriculas[] matriculas = new Matriculas[1000];
-                    break;
-
-                case "Alunos":
-                    Alunos[] alunos = new Alunos[1000];
-                    break;
-
-                case "Disciplinas":
-                    Disciplinas[] disciplinas = new Disciplinas[1000];
-                    break;
-            }
-        }
-
         // Método para verificar se a base de dados está correta
         public static bool VerifyDatabase()
         {
