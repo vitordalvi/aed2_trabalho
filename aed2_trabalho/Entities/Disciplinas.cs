@@ -1,6 +1,6 @@
 ﻿namespace aed2_trabalho.entities
 {
-    public class Disciplina
+    public class Disciplinas
     {
         // Unica
         private int CodigoDisciplina;
@@ -8,7 +8,7 @@
         private double NotaMinima;
 
         int disciplinaInicial = 1;
-        public Disciplina(string nomeDisciplina, double notaMinima)
+        public Disciplinas(string nomeDisciplina, double notaMinima)
         {
             CodigoDisciplina += disciplinaInicial + 1;
             NomeDisciplina = nomeDisciplina;

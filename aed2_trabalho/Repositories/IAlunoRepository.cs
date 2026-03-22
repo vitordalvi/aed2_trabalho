@@ -4,6 +4,6 @@ namespace aed2_trabalho.Repositories
 {
     public interface IAlunoRepository
     {
-        public Aluno CreateAluno(Aluno aluno);
+        public void CreateAluno(string nome, int idade);
     }
 }

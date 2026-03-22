@@ -81,20 +81,6 @@ namespace aed2_trabalho.Services
                 }
             }
 
-            //// Converte o valor das opcoes como string para inteiro no novo array
-            //for (int i = 0; i < ops.Length; i++)
-            //{
-            //    int opcoesConvertidas = ConverterValorOpcao(ops[i]);
-            //    opsConvertidas[i] = opcoesConvertidas;
-            //}
-
-            //// Se nas opcoes convertidas tiver o valor de op convertido, retorna true
-            //if (opsConvertidas.Contains(ConverterValorOpcao(op)))
-            //{
-            //    return true;
-            //}
-
-            // Se passar por todas as validacoes, retorna true
             return true;
         }
 

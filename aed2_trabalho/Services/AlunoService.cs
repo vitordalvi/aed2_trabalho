@@ -11,5 +11,10 @@ namespace aed2_trabalho.Services
             _alunoRepository = alunoRepository;
         }
 
+        public void CreateAluno(string nome, int idade)
+        {
+            _alunoRepository.CreateAluno(nome, idade);
+        }
+
     }
 }

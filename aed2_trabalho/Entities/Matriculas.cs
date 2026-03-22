@@ -1,6 +1,6 @@
 ﻿namespace aed2_trabalho.entities
 {
-    public class Matricula
+    public class Matriculas
     {
         // Unico
         private int CodigoDisciplina;
@@ -10,8 +10,7 @@
         private double Nota1;
         private double Nota2;
 
-
-        public Matricula(int codigoDisciplina, int matriculaAluno, double nota1, double nota2)
+        public Matriculas(int codigoDisciplina, int matriculaAluno, double nota1, double nota2)
         {
             CodigoDisciplina = codigoDisciplina; 
             MatriculaAluno = matriculaAluno;

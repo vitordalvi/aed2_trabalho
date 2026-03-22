@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using aed2_trabalho.Services;
+﻿using aed2_trabalho.Services;
+using aed2_trabalho.Entities;
+using aed2_trabalho.entities;
 
 namespace aed2_trabalho.Data
 {
@@ -35,8 +34,33 @@ namespace aed2_trabalho.Data
                     continue;
                 }
 
+                // Nome da entidade que está faltando, já com a retirada da extensão do arquivo
+                string missingEntity = Path.GetFileName(dbPaths[i]).Split('.')[0];
+
                 // Se não existir, cria o arquivo que está faltando
-                File.Create(dbPaths[i]).Close();
+                File.CreateText(dbPaths[i]);
+
+                // Cria o vetor que vai conter os objetos de acordo com seus tipos
+                InitializeData(missingEntity);
+            }
+        }
+        
+        // Criação dos vetores que conterão os objetos
+        public static void InitializeData(string type)
+        {
+            switch (type)
+            {
+                case "Matriculas":
+                    Matriculas[] matriculas = new Matriculas[1000];
+                    break;
+
+                case "Alunos":
+                    Alunos[] alunos = new Alunos[1000];
+                    break;
+
+                case "Disciplinas":
+                    Disciplinas[] disciplinas = new Disciplinas[1000];
+                    break;
             }
         }
 

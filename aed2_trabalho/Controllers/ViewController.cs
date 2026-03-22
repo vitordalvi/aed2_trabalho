@@ -10,6 +10,7 @@
             _viewService = viewService;
         }
 
+        // GET INICIO
         public static void Iniciar()
         {
             string op = ViewService.InputOpcoes();

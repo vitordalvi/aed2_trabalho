@@ -1,15 +1,14 @@
-﻿namespace aed2_trabalho.entities
+﻿namespace aed2_trabalho.Entities
 {
-    public class Aluno
+    public class Alunos
     {
         // Unica
         private int MatriculaAluno;
         private string Nome;
         private int Idade;
 
-
         int matriculaInicial = 0;
-        public Aluno(string nome, int idade)
+        public Alunos(string nome, int idade)
         {
             MatriculaAluno += matriculaInicial + 1;
             Nome = nome;
