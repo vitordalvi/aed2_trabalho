@@ -13,6 +13,8 @@ namespace aed2_trabalho.Repositories
         public void CreateAluno(string nome, int idade)
         {
             Alunos aluno = new Alunos(nome, idade);
+            _dbService.NUMEROS_ALUNOS += 1;
+            //_dbService.SaveChanges();
         }
 
         
