@@ -12,14 +12,7 @@
         {
             //ViewController.Iniciar();
             DatabaseInitializer.VerifyDatabase();
-
-            string basePath = AppContext.BaseDirectory;
-            string path = $"{basePath}/Data/db/Alunos.dat";
-            //Alunos aluno = new Alunos("teste", 10);
-            //Alunos aluno2 = new Alunos("teste3", 30);
-            //File.AppendAllText(path, aluno.GetNome() + "\n");
-            //File.AppendAllText(path, aluno2.GetNome() + "\n");
-            
+            DbService.InitializeData();
         }
     }
 }
