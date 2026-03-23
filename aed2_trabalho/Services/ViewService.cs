@@ -1,55 +1,98 @@
-﻿using aed2_trabalho.View;
+﻿using aed2_trabalho.Controllers;
+using aed2_trabalho.View;
 
 namespace aed2_trabalho.Services
 {
     public class ViewService
     {
-        // Input das opcoes
-        public static string InputOpcoes()
+        private readonly InicioView _inicioView;
+        private readonly AlunosView _alunosView;
+        private readonly DisciplinasView _disciplinasView;
+        private readonly MatriculasView _matriculasView;
+
+        public ViewService(InicioView inicioView, AlunosView alunosView, DisciplinasView disciplinasView, MatriculasView matriculasView)
         {
-            InicioView.AoIniciar();
-            string op = Console.ReadLine();
-            return op;
+            _inicioView = inicioView;
+            _alunosView = alunosView;
+            _disciplinasView = disciplinasView;
+            _matriculasView = matriculasView;
         }
 
-        // Verificar opcao selecionada
-        public static void OpcaoSelecionada(string op)
+        // Input das opcoes
+        public void Iniciar()
         {
+            string op = _inicioView.Iniciar();
+
             switch (op)
             {
                 case "0":
                     // implementar servico sair?
-                    Console.WriteLine("Serviço sair e sair");
+                    Console.WriteLine("Salvar e Sair");
                     break;
 
-                    case "1":
+                case "1":
                     // implementar servico consulta
-                    Console.WriteLine("serviço consulta");
+                    Console.WriteLine("\nSelecione o item que será consultado:\n1 - Alunos\n2 - Disciplinas\n3 - Alunos das Disciplinas\n4 - Disciplinas do Aluno)");
+                    Console.Write("\nSelecione a opção: ");
+                    SelecionarItem(Console.ReadLine());
                     break;
 
-                    case "2":
+                case "2":
                     // implementar servico cadastro
-                    Console.WriteLine("serviço cadastro");
+                    Console.WriteLine("\nSelecione o item que será cadastrado:\n1 - Alunos\n2 - Disciplinas\n3 - Matrículas\n4 - Atribuir Nota a Aluno");
+                    Console.Write("\nSelecione a opção: ");
+                    SelecionarItem(Console.ReadLine());
                     break;
 
-                    case "3":
+                case "3":
                     // implementar servico salvar
-                    Console.WriteLine("servico salvar e realizar outra operacao");
+                    Console.WriteLine("Salvar e Realizar outra Operação");
                     break;
 
-                    default:
+                default:
                     Console.Write("Opção inválida. Tente novamente!\n\n");
 
-                    string tentarNovamente = InputOpcoes();
-                    OpcaoSelecionada(tentarNovamente);
+                    op = _inicioView.Iniciar();
                     break;
 
-                }
-            } 
+            }
+        }    
+        
+        public void SelecionarItem(string op)
+        {
+            if (op == null)
+            {
+                throw new Exception("Item inválido.");
+            }
+
+            switch (op)
+            {
+                case "1":
+                    _alunosView.SelecionarOpcao(op);
+                    break;
+
+                case "2":
+                    _disciplinasView.SelecionarOpcao(op);
+                    break;
+
+                case "3":
+                    _matriculasView.SelecionarOpcao(op);
+                    break;
+
+                case "4":
+                    _alunosView.SelecionarOpcao(op);
+                    break;
+
+                default:
+                    Console.WriteLine("Opção inválida.");
+                    break;
+
+            }
+        }
 
 
         // Valida a opcao, retornando valor booleano
-        public static bool ValidarOpcao(string op)
+        public bool ValidarOpcao(string op)
         {
             // Opcoes disponiveis
             string[] ops = new string[] { "0", "1", "2", "3" };
@@ -85,7 +128,7 @@ namespace aed2_trabalho.Services
         }
 
         // Converte o valor
-        public static int ConverterValorOpcao(string op)
+        public int ConverterValorOpcao(string op)
         {
             // Se for invalido, retorna exception
             if (ValidarOpcao(op) == false)
@@ -98,7 +141,7 @@ namespace aed2_trabalho.Services
         }
 
         // Retorna a opção como inteiro
-        public static int GetOpcao(string op)
+        public int GetOpcao(string op)
         {
             return ConverterValorOpcao(op);
         }
