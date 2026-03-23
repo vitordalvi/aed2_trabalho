@@ -3,40 +3,63 @@ using aed2_trabalho.Entities;
 
 namespace aed2_trabalho.Data
 {
-    public class DbService : DatabaseInitializer
+    public class DbService
     {
         // Valor inicial entidades
-        public static int NUMEROS_ALUNOS = 0;
-        public static int NUMEROS_DISCIPLINAS = 0;
-        public static int NUMEROS_MATRICULAS = 0;
+        public int NUMEROS_ALUNOS = 0;
+        public int NUMEROS_DISCIPLINAS = 0;
+        public int NUMEROS_MATRICULAS = 0;
 
         // Criação dos vetores que conterão os objetos
-        public static Alunos[] alunos = new Alunos[1000];
-        public static Disciplinas[] disciplinas = new Disciplinas[1000];
-        public static Matriculas[] matriculas = new Matriculas[1000];
+        public Alunos[] alunos = new Alunos[1000];
+        public Disciplinas[] disciplinas = new Disciplinas[1000];
+        public Matriculas[] matriculas = new Matriculas[1000];
 
-        public static void LoadData()
+        // Caminhos da BD
+        public static string basePath = AppContext.BaseDirectory;
+        public string dbFolderPath = "Data/db";
+        public string[] dbPaths = new string[3]
         {
+            $"{basePath}/Data/db/Alunos.dat",
+            $"{basePath}/Data/db/Matriculas.dat",
+            $"{basePath}/Data/db/Disciplinas.dat"
+        };
+
+        // Método para carregar todos os dados dos arquivos
+        public void LoadData()
+        {
+            // Passa por todo o arquivo
             for (int i = 0; i < dbPaths.Length; i++)
             {
+                // Lê todas as linhas do arquivo
                 string[] lines = File.ReadAllLines(dbPaths[i]);
+
+                // Passa por cada linha
                 for (int j = 0; j < lines.Length; j++)
                 {
+                    // Separa os dados da linha em um vetor
                     string[] data = lines[j].Split(';');
+                    
+                    // Faz a separação da leitura de acordo com o tipo do arquivo, para criar os objetos certinho
                     switch (dbPaths[i].Split('.')[0])
                     {
+                        // Se for alunos, cria o objeto do aluno
                         case "Alunos":
                             Alunos aluno = new Alunos(int.Parse(data[0]), data[1], int.Parse(data[2]));
+                            // Alunos na posição da variável do indice, é setado naquela posição
                             alunos[NUMEROS_ALUNOS] = aluno;
+                            // Aumento no número do índice
                             NUMEROS_ALUNOS++;
                             break;
 
+                            // Mesma lógica
                         case "Disciplinas":
                             Disciplinas disciplina = new Disciplinas(int.Parse(data[0]), data[1], double.Parse(data[2]));
                             disciplinas[NUMEROS_DISCIPLINAS] = disciplina;
                             NUMEROS_DISCIPLINAS++;
                             break;
 
+                            // Mesma lógica
                         case "Matriculas":
                             Matriculas matricula = new Matriculas(int.Parse(data[0]), int.Parse(data[1]), double.Parse(data[2]), double.Parse(data[3]));
                             matriculas[NUMEROS_MATRICULAS] = matricula;
@@ -47,32 +70,9 @@ namespace aed2_trabalho.Data
             }
         }
 
-        public static bool AddAluno(Alunos aluno)
-        {
-            try
-            {
-                if (NUMEROS_ALUNOS >= alunos.Length)
-                {
-                    throw new Exception("Limite de alunos atingido.");
-                }
 
-                alunos[NUMEROS_ALUNOS] = aluno;
-                NUMEROS_ALUNOS++;
 
-                string linha = $"{aluno.GetMatriculaAluno()};{aluno.GetNome()};{aluno.GetIdade()}";
-                File.AppendAllText(dbPaths[0], linha + Environment.NewLine);
-
-                return true;
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return false;
-            }
-        }
-
-        public static bool AddMatricula(Matriculas matricula)
+        public bool AddMatricula(Matriculas matricula)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace aed2_trabalho.Data
                 return false;
             }
         }
-        public static bool AddDisciplina(Disciplinas disciplina)
+        public bool AddDisciplina(Disciplinas disciplina)
         {
             try
             {
