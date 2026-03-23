@@ -11,10 +11,9 @@
         }
 
         // GET INICIO
-        public static void Iniciar()
+        public void Iniciar()
         {
-            string op = ViewService.InputOpcoes();
-            ViewService.OpcaoSelecionada(op);
+            _viewService.Iniciar();
         }
     }
 }
