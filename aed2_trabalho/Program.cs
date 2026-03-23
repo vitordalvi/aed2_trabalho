@@ -12,7 +12,7 @@
         {
             //ViewController.Iniciar();
             DatabaseInitializer.VerifyDatabase();
-            DbService.InitializeData();
+            DbService.LoadData();
         }
     }
 }
