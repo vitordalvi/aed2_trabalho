@@ -2,7 +2,7 @@
 
 namespace aed2_trabalho.entities
 {
-    public class Disciplinas : BaseEntity
+    public class Disciplinas
     {
         // Unica
         private int CodigoDisciplina;
@@ -10,6 +10,8 @@ namespace aed2_trabalho.entities
         private double NotaMinima;
 
         int disciplinaInicial = 1;
+
+        // Construtor para criação de novos objetos, com ID automatico
         public Disciplinas(string nomeDisciplina, double notaMinima)
         {
             CodigoDisciplina += disciplinaInicial + 1;
@@ -19,6 +21,15 @@ namespace aed2_trabalho.entities
             disciplinaInicial++;
         }
 
+        // Construtor para leitura no arquivo, com ID atribuido
+        public Disciplinas(int codigoDisciplina, string nomeDisciplina, double notaMinima)
+        {
+            CodigoDisciplina = codigoDisciplina;
+            NomeDisciplina = nomeDisciplina;
+            NotaMinima = notaMinima;
+        }
+
+        // Construtor vazio para criação do vetor inicial
         public Disciplinas() { }
 
         public int GetCodigoDisciplina()

@@ -8,6 +8,8 @@
         private int Idade;
 
         int matriculaInicial = 0;
+
+        // Construtor utilizado para criação de um objeto aluno, atribuindo automaticamente o ID
         public Alunos(string nome, int idade)
         {
             MatriculaAluno += matriculaInicial + 1;
@@ -17,6 +19,15 @@
             matriculaInicial++;
         }
 
+        // Caso utilizado somente para leitura do arquivo
+        public Alunos(int matriculaAluno, string nome, int idade)
+        {
+            MatriculaAluno = matriculaAluno;
+            Nome = nome;
+            Idade = idade;
+        }
+
+        // Construtro para criação do objeto para o vetor de alunos
         public Alunos() { }
 
         public int GetMatriculaAluno()
