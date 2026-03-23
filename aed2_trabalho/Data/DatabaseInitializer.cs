@@ -38,7 +38,7 @@ namespace aed2_trabalho.Data
                 string missingEntity = Path.GetFileName(dbPaths[i]).Split('.')[0];
 
                 // Se não existir, cria o arquivo que está faltando
-                File.CreateText(dbPaths[i]);
+                File.CreateText(dbPaths[i]).Close();
             }
         }
         
