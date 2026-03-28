@@ -24,39 +24,42 @@ namespace aed2_trabalho.Services
         {
             string op = _inicioView.Iniciar();
 
-            switch (op)
+            while (true)
             {
-                case "0":
-                    // implementar servico sair?
-                    Console.WriteLine("Salvar e Sair");
-                    break;
+                switch (op)
+                {
+                    case "0":
+                        // implementar servico sair?
+                        Console.WriteLine("Salvar e Sair");
+                        break;
 
-                case "1":
-                    // implementar servico consulta
-                    Console.WriteLine("\nSelecione o item que será consultado:\n1 - Alunos\n2 - Disciplinas\n3 - Alunos das Disciplinas\n4 - Disciplinas do Aluno)");
-                    Console.Write("\nSelecione a opção: ");
-                    SelecionarItem(Console.ReadLine());
-                    break;
+                    case "1":
+                        // implementar servico consulta
+                        Console.WriteLine("\nSelecione o item que será consultado:\n1 - Alunos\n2 - Disciplinas\n3 - Alunos das Disciplinas\n4 - Disciplinas do Aluno)");
+                        Console.Write("\nSelecione a opção: ");
+                        SelecionarItem(Console.ReadLine());
+                        break;
 
-                case "2":
-                    // implementar servico cadastro
-                    Console.WriteLine("\nSelecione o item que será cadastrado:\n1 - Alunos\n2 - Disciplinas\n3 - Matrículas\n4 - Atribuir Nota a Aluno");
-                    Console.Write("\nSelecione a opção: ");
-                    SelecionarItem(Console.ReadLine());
-                    break;
+                    case "2":
+                        // implementar servico cadastro
+                        Console.WriteLine("\nSelecione o item que será cadastrado:\n1 - Alunos\n2 - Disciplinas\n3 - Matrículas\n4 - Atribuir Nota a Aluno");
+                        Console.Write("\nSelecione a opção: ");
+                        SelecionarItem(Console.ReadLine());
+                        break;
 
-                case "3":
-                    // implementar servico salvar
-                    Console.WriteLine("Salvar e Realizar outra Operação");
-                    break;
+                    case "3":
+                        // implementar servico salvar
+                        Console.WriteLine("Salvar e Realizar outra Operação");
+                        break;
 
-                default:
-                    Console.Write("Opção inválida. Tente novamente!\n\n");
+                    default:
+                        Console.Write("Opção inválida. Tente novamente!\n\n");
 
-                    op = _inicioView.Iniciar();
-                    break;
+                        op = _inicioView.Iniciar();
+                        break;
 
-            }
+                }
+            }        
         }    
         
         public void SelecionarItem(string op)

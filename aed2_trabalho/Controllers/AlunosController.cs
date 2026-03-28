@@ -1,5 +1,6 @@
 ﻿using aed2_trabalho.Entities;
 using aed2_trabalho.Services;
+using aed2_trabalho.View;
 
 namespace aed2_trabalho.Controllers
 {
@@ -14,7 +15,24 @@ namespace aed2_trabalho.Controllers
         // Controller para criar o Aluno
         public Alunos[] CriarAlunos(string[] nomes, int[] idades)
         {
-            return _alunosService.CreateAlunos(nomes, idades);
+            var alunos = _alunosService.CreateAlunos(nomes, idades);
+
+            if (alunos == null)
+            {
+                throw new Exception("Houve uma falha para criação dos alunos.");
+            }
+
+            return alunos; 
+        }
+
+        public bool SalvarAlunos(Alunos[] alunos)
+        {
+            return _alunosService.Save(alunos);
+        }
+
+        public void Continue(string op)
+        {
+            _alunosService.Continue(op);
         }
     }
 }

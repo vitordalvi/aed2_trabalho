@@ -1,4 +1,5 @@
 ﻿using aed2_trabalho.Controllers;
+using aed2_trabalho.Services;
 
 namespace aed2_trabalho.View
 {
@@ -32,6 +33,7 @@ namespace aed2_trabalho.View
             }
         }
 
+        // Ver se consigo adaptar todas as validações no ViewServices (se der tempo, se não, deixar aqui mesmo)
         public void CadastroAlunos()
         {
             Console.WriteLine("\nVOCÊ SOLICITOU A OPÇÃO DE CADASTRO: Alunos\n");
@@ -62,16 +64,64 @@ namespace aed2_trabalho.View
             }
 
             var alunosCriados = _alunosController.CriarAlunos(nomes, idades);
+            string op = SalvarAlunos();
 
-            Console.WriteLine($"\n{alunosCriados.Length} aluno(s) criado(s) com sucesso.");
+            if (op == "s")
+            {
+                _alunosController.SalvarAlunos(alunosCriados);
+                Console.WriteLine($"\n{alunosCriados.Length} aluno(s) criado(s) com sucesso.");
+            }
+            else
+            {
+                Console.WriteLine("\nOperação cancelada, nenhum aluno salvo.");
+            }
+
+            string repeatOption = ExitOption();
+            _alunosController.Continue(repeatOption);
+
         }
 
         public string SalvarAlunos()
         {
-            Console.Write("Insira (S) para salvar alterações e (N) para ignorar: ");
-            string op = Console.ReadLine();
+            while (true)
+            {
+                Console.Write("Insira (S) para salvar alterações e (N) para ignorar: ");
+                string op = Console.ReadLine().ToLowerInvariant();
 
-            return op;
+                if (op == null)
+                {
+                    Console.Write("O valor não pode ser vazio, tente novamente: ");
+                }
+
+                if (op == "s" || op == "n")
+                {
+                    return op;
+                }
+
+                Console.Write("Insira uma opção válida: (S) ou (N): ");
+            }
+            
+        }
+
+        public string ExitOption()
+        {
+            while (true)
+            {
+                Console.Write("\nVocê realizar outras operações? (S) ou (N): ");
+                string op = Console.ReadLine().ToLowerInvariant();
+
+                if (op == null)
+                {
+                    Console.Write("O valor não pode ser vazio, tente novamente: ");
+                }
+
+                if (op == "s" || op == "n")
+                {
+                    return op;
+                }
+
+                Console.Write("Insira uma opção válida: (S) ou (N): ");
+            }
         }
 
         public void AtribuirNotaAluno()

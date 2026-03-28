@@ -48,19 +48,33 @@ namespace aed2_trabalho.Services
 
         public bool Save(Alunos[] alunos)
         {
+            if (alunos == null || alunos.Length == 0)
+            {
+                throw new ArgumentException("O número de alunos é inválido.");
+            }
+
             for (int i = 0; i < alunos.Length; i++)
             {
-                var save = _alunoRepository.Save(alunos[i]);
-
-                if (save == false)
+                if (!_alunoRepository.Save(alunos[i]))
                 {
-                    throw new Exception("Falha ao salvar alunos.");
+                    throw new Exception($"Falha ao salvar o aluno na posição {i}");
                 }
-
-                Console.WriteLine($"Alunos criados com sucesso.\nID: {alunos[i].GetMatriculaAluno()}, Nome: {alunos[i].GetNome()}, Idade: {alunos[i].GetIdade()}\n");
             }
 
             return true;
+        }
+
+        public void Continue(string op)
+        {
+            if (op == "n")
+            {
+                Console.WriteLine("\nFinalizando o sistema...\n");
+                Environment.Exit(0);
+            } 
+            else if (op == "s")
+            {
+                Console.WriteLine("\nVoltando para o menu inicial...\n");
+            } 
         }
 
     }
