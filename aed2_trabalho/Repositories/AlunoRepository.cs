@@ -1,4 +1,5 @@
-﻿using aed2_trabalho.Data;
+﻿using System.Linq.Expressions;
+using aed2_trabalho.Data;
 using aed2_trabalho.Entities;
 
 namespace aed2_trabalho.Repositories
@@ -46,6 +47,38 @@ namespace aed2_trabalho.Repositories
             throw new Exception("Aluno não encontrado por matrícula.");
         }
 
+        public Alunos[] GetAllAlunos() 
+        { 
+            try
+            {
+                string[] lines = File.ReadAllLines(_dbContext.dbPaths[0]);
+                Alunos[] alunos = new Alunos[lines.Length];
+
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    if (string.IsNullOrEmpty(lines[i]))
+                    {
+                        throw new Exception($"O índice {i} do arquivo {_dbContext.dbPaths[0]} está vazio ou é nulo.");
+                    }
+
+                    string[] data = lines[i].Split(';');
+                    
+                    for (int j = 0; j < data.Length; j++)
+                    {
+                        Alunos aluno = new Alunos(int.Parse(data[0]), data[1], int.Parse(data[2]));
+                        alunos[i] = aluno;
+                    }  
+                }
+
+                return alunos;
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao consultar todos os alunos.");
+            }
+        }
+
         // Método para adicionar aluno
         public Alunos AddAluno(string nome, int idade)
         {
@@ -81,38 +114,39 @@ namespace aed2_trabalho.Repositories
         // Método para remover um aluno
         // Arrumar o método, acho que está incorreto
         // TEM QUE COLOCAR A SUBTRAÇÃO DO NUMERO DE ALUNOS PARA CONSEGUIR CRIAR NO INDICE CERTO AS PROXIMAS OPERACOES
-        public bool DeleteAluno(int matricula)
-        {
-            Alunos aluno = GetAlunoByMatricula(matricula);
+        // ***** esse método não é obrigatório, somente vai ser implementado caso eu tenha tempo *****
+        //public bool DeleteAluno(int matricula)
+        //{
+        //    Alunos aluno = GetAlunoByMatricula(matricula);
 
-            try
-            {
-                string[] lines = File.ReadAllLines(_dbContext.dbPaths[0]);
+        //    try
+        //    {
+        //        string[] lines = File.ReadAllLines(_dbContext.dbPaths[0]);
 
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    string[] data = lines[i].Split(';');
+        //        for (int i = 0; i < lines.Length; i++)
+        //        {
+        //            string[] data = lines[i].Split(';');
 
-                    for (int j = 0; j < lines[i].Length; j++)
-                    {
-                        if (data[0] == aluno.GetMatriculaAluno().ToString())
-                        {
-                            for (int k = 0; k < lines[i].Length; k++)
-                            {
-                                lines[k].Replace(data[k], "");
-                            }
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return false;
-            }
+        //            for (int j = 0; j < lines[i].Length; j++)
+        //            {
+        //                if (data[0] == aluno.GetMatriculaAluno().ToString())
+        //                {
+        //                    for (int k = 0; k < lines[i].Length; k++)
+        //                    {
+        //                        lines[k].Replace(data[k], "");
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        Console.WriteLine(ex);
+        //        return false;
+        //    }
 
-            return true;
-        }
+        //    return true;
+        //}
 
         public bool Save(Alunos aluno)
         {

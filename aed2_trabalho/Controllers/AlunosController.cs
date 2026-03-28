@@ -25,6 +25,11 @@ namespace aed2_trabalho.Controllers
             return alunos; 
         }
 
+        public Alunos[] ConsultarTodosAlunos()
+        {
+            return _alunosService.ConsultarTodosAlunos();
+        }
+
         public bool SalvarAlunos(Alunos[] alunos)
         {
             return _alunosService.Save(alunos);

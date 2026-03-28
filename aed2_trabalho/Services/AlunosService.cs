@@ -46,6 +46,11 @@ namespace aed2_trabalho.Services
             return alunosCriados;
         }
 
+        public Alunos[] ConsultarTodosAlunos()
+        {
+            return _alunoRepository.GetAllAlunos();
+        }
+
         public bool Save(Alunos[] alunos)
         {
             if (alunos == null || alunos.Length == 0)
