@@ -1,7 +1,8 @@
 # Sistema de Gerenciamento Acadêmico (AED II)
 
-Projeto desenvolvido para a disciplina de Algoritmos e Estruturas de Dados II, com foco em manipulação de dados em memória e persistência em arquivos.
-Esse projeto muito provavelmente será utilizado para aprendizado de outras estruturas de dados, como Listas Encadeadas, Pilhas, Filas e Grafos.
+Projeto desenvolvido para a disciplina de Algoritmos e Estruturas de Dados II, com foco em manipulação de dados em memória e persistência em arquivos.  
+Na versão atual do projeto, somente **vetores** puderam ser utilizados como forma de armazenamento em memória. Todavia, o projeto provavelmente será
+utilizado para aprendizado de outras estruturas de dados, como Listas Encadeadas, Pilhas, Filas e Grafos.
 
 ## Objetivo
 
