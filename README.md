@@ -30,11 +30,11 @@ Sem uso de banco de dados, utilizando **arquivos `.dat` e estruturas de dados**.
 
 ## Estrutura do Projeto
 
-├── Entities/ # Classes de domínio (Aluno, Disciplina, Matrícula)
-├── Data/ # Manipulação de arquivos e armazenamento
-├── Repositorios/ # Gerenciamento de dados e entidades
-├── Services/ # Regras de negócio
-├── Program.cs # Ponto de entrada
+- Entities/ # Classes de domínio (Aluno, Disciplina, Matrícula)
+-  Data/ # Manipulação de arquivos e armazenamento
+- Repositorios/ # Gerenciamento de dados e entidades
+- Services/ # Regras de negócio
+- Program.cs # Ponto de entrada
 
 ## Desafios Técnicos
 - Gerenciamento manual de IDs (sem banco)
