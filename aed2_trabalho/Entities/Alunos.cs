@@ -7,16 +7,13 @@
         private string Nome;
         private int Idade;
 
-        int matriculaInicial = 0;
+        private int alunoIndex;
 
-        // Construtor utilizado para criação de um objeto aluno, atribuindo automaticamente o ID
+        // Construtor utilizado para criação, a matrícula não é atribuida automaticamente
         public Alunos(string nome, int idade)
         {
-            MatriculaAluno += matriculaInicial + 1;
             Nome = nome;
             Idade = idade;
-
-            matriculaInicial++;
         }
 
         // Caso utilizado somente para leitura do arquivo
@@ -53,6 +50,15 @@
         public void SetIdade(int idade)
         {
             Idade = idade;
+        }
+
+        public void SetAlunoIndex(int alunoIndex)
+        {
+            this.alunoIndex = alunoIndex;
+        }
+        public int GetAlunoIndex()
+        {
+            return alunoIndex;
         }
 
         public override string ToString()

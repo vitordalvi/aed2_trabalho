@@ -16,18 +16,25 @@ namespace aed2_trabalho.Services
             {
                 throw new ArgumentException("O nome não pode ser nulo.");
             }
-
-            if (idade <= 0)
+            else if (idade <= 0)
             {
                 throw new ArgumentException("A idade do Aluno não pode ser igual ou menor à zero.");
             }
 
-            var success = _alunoRepository.AddAluno(nome, idade);
+            var aluno = _alunoRepository.AddAluno(nome, idade);
 
-            if (!success)
+            if (aluno == null)
             {
-                throw new Exception("Falha ao adicionar o aluno no banco de dados.");
+                throw new Exception("Falha para criação do aluno.");
             }
+
+            var save = _alunoRepository.Save(aluno);
+
+            if (save != false)
+            {
+                Console.WriteLine($"Aluno: ID: {aluno.GetMatriculaAluno()}, Nome: {aluno.GetNome()}, Idade: {aluno.GetIdade()}");
+            }
+            
         }
 
 

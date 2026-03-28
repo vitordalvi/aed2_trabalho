@@ -5,8 +5,9 @@ namespace aed2_trabalho.Repositories
 {
     public interface IAlunoRepository
     {
-        public bool AddAluno(string nome, int idade);
+        public Alunos AddAluno(string nome, int idade);
         public bool DeleteAluno(int matricula);
         public Alunos GetAlunoByMatricula(int matricula);
+        public bool Save(Alunos aluno);
     }
 }
