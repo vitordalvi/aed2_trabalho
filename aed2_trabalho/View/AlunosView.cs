@@ -20,7 +20,7 @@ namespace aed2_trabalho.View
                     break;
 
                 case "2":
-                    ConsultaAluno();
+                    ConsultarTodosAlunos();
                     break;
 
                 case "3":
@@ -81,26 +81,33 @@ namespace aed2_trabalho.View
 
         }
 
-        public string SalvarAlunos()
+        public void ConsultarTodosAlunos()
         {
-            while (true)
+            Console.WriteLine("\nVOCÊ SOLICITOU A OPÇÃO DE CONSULTA: Alunos\n");
+
+            var alunos = _alunosController.ConsultarTodosAlunos();
+
+            for (int i = 0; i < alunos.Length; i++)
             {
-                Console.Write("Insira (S) para salvar alterações e (N) para ignorar: ");
-                string op = Console.ReadLine().ToLowerInvariant();
+                int matricula = alunos[i].GetMatriculaAluno();
+                string nome = alunos[i].GetNome();
+                int idade = alunos[i].GetIdade();
 
-                if (op == null)
-                {
-                    Console.Write("O valor não pode ser vazio, tente novamente: ");
-                }
-
-                if (op == "s" || op == "n")
-                {
-                    return op;
-                }
-
-                Console.Write("Insira uma opção válida: (S) ou (N): ");
+                Console.WriteLine($"{matricula}, {nome}, {idade}.");
             }
-            
+
+            string repeatOption = ExitOption();
+            _alunosController.Continue(repeatOption);
+        }
+
+        public void AtribuirNotaAluno()
+        {
+            Console.WriteLine("\nVOCÊ SOLICITOU A OPÇÃO DE CADASTRO: Atribuir Nota ao Aluno\n");
+        }
+
+        public void ConsultarDisciplinasAluno()
+        {
+            Console.WriteLine("\nVOCÊ SOLICITOU A OPÇÃO DE CONSULTA: Disciplinas do Aluno\n");
         }
 
         public string ExitOption()
@@ -124,19 +131,26 @@ namespace aed2_trabalho.View
             }
         }
 
-        public void AtribuirNotaAluno()
+        public string SalvarAlunos()
         {
-            Console.WriteLine("\nVOCÊ SOLICITOU A OPÇÃO DE CADASTRO: Atribuir Nota ao Aluno\n");
-        }
+            while (true)
+            {
+                Console.Write("Insira (S) para salvar alterações e (N) para ignorar: ");
+                string op = Console.ReadLine().ToLowerInvariant();
 
-        public void ConsultaAluno()
-        {
-            Console.WriteLine("\nVOCÊ SOLICITOU A OPÇÃO DE CONSULTA: Alunos\n");
-        }
+                if (op == null)
+                {
+                    Console.Write("O valor não pode ser vazio, tente novamente: ");
+                }
 
-        public void ConsultarDisciplinasAluno()
-        {
-            Console.WriteLine("\nVOCÊ SOLICITOU A OPÇÃO DE CONSULTA: Disciplinas do Aluno\n");
+                if (op == "s" || op == "n")
+                {
+                    return op;
+                }
+
+                Console.Write("Insira uma opção válida: (S) ou (N): ");
+            }
+
         }
     }
 }

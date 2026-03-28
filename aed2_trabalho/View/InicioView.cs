@@ -1,6 +1,5 @@
 ﻿namespace aed2_trabalho.View
 {
-    using Services;
     public class InicioView
     {
         public string Iniciar()

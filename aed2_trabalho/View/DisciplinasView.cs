@@ -32,6 +32,11 @@ namespace aed2_trabalho.View
             Console.WriteLine("VOCÊ SOLICITOU A OPÇÃO DE CADASTRO: Cadastro da Disciplina");
         }
 
+        public void ConsultarTodasDisciplinas()
+        {
+            Console.WriteLine("VOCÊ SOLICITOU A OPÇÃO DE CONSULTA: Todas Disciplinas");
+        }
+
         public void ConsultaAlunosDisciplina()
         {
             Console.WriteLine("VOCÊ SOLICITOU A OPÇÃO DE CONSULTA: Consultar Alunos na Disciplina");
