@@ -3,6 +3,7 @@ using aed2_trabalho.View;
 
 namespace aed2_trabalho.Services
 {
+    // refatorar serviço com funcoes para cada escolha, dps integrar com opcoes de outras views como deseja salvar x entidade (arruamr uma forma de colocar todas em 1)
     public class ViewService
     {
         private readonly InicioView _inicioView;
@@ -88,6 +89,7 @@ namespace aed2_trabalho.Services
                     break;
 
             }
+
         }
 
 
