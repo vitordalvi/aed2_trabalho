@@ -1,10 +1,9 @@
-﻿using System.Runtime.ConstrainedExecution;
-using aed2_trabalho.Data;
+﻿using aed2_trabalho.Data;
 using aed2_trabalho.Entities;
 
 namespace aed2_trabalho.Repositories
 {
-    class AlunoRepository : IAlunoRepository
+    public class AlunoRepository : IAlunoRepository
     {
         private readonly DbService _dbContext;
         public AlunoRepository(DbService dbContext)
@@ -80,6 +79,7 @@ namespace aed2_trabalho.Repositories
         }
 
         // Método para remover um aluno
+        // Arrumar o método, acho que está incorreto
         // TEM QUE COLOCAR A SUBTRAÇÃO DO NUMERO DE ALUNOS PARA CONSEGUIR CRIAR NO INDICE CERTO AS PROXIMAS OPERACOES
         public bool DeleteAluno(int matricula)
         {
