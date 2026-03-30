@@ -54,15 +54,20 @@ namespace aed2_trabalho.Repositories
                 string[] lines = File.ReadAllLines(_dbContext.dbPaths[0]);
                 Alunos[] alunos = new Alunos[lines.Length];
 
+                // passa por todas as linhas do arquivo
                 for (int i = 0; i < lines.Length; i++)
                 {
+                    // se algum indice for vazio, possivelmente pode dar um problema para a ordem
                     if (string.IsNullOrEmpty(lines[i]))
                     {
+                        // entao retorna uma exception para resolução do problema, aí tem que ver pq ficou nulo mas acho que nao vai acontecer
                         throw new Exception($"O índice {i} do arquivo {_dbContext.dbPaths[0]} está vazio ou é nulo.");
                     }
 
+                    // vetor par armazenar os dados separados por ;
                     string[] data = lines[i].Split(';');
                     
+                    // cria um novo aluno de acordo com o tamanho do arquivo e posiciona os atributos na posição correta
                     for (int j = 0; j < data.Length; j++)
                     {
                         Alunos aluno = new Alunos(int.Parse(data[0]), data[1], int.Parse(data[2]));
@@ -70,6 +75,7 @@ namespace aed2_trabalho.Repositories
                     }  
                 }
 
+                // retorna o vetor contendo todos os alunos
                 return alunos;
             }
 
@@ -100,7 +106,7 @@ namespace aed2_trabalho.Repositories
                 _dbContext.TOTAL_ALUNOS++;
                 _dbContext.NUMEROS_ALUNOS++;
 
-                // Retorna pro repositorio
+                // Retorna o objeto do aluno
                 return novoAluno;
             }
 
@@ -148,13 +154,18 @@ namespace aed2_trabalho.Repositories
         //    return true;
         //}
 
+        // Salvar os alunos no arquivo
         public bool Save(Alunos aluno)
         {
             try
             {
+                // pega o indice em que o aluno está atualmente, na memória 
                 int posLinha = aluno.GetAlunoIndex();
+
+                // pré definição da linha que será inserida
                 string linha = $"{aluno.GetMatriculaAluno()};{aluno.GetNome()};{aluno.GetIdade()}";
 
+                // leitura de todas as linhas do arquivo
                 string[] lines = File.ReadAllLines(_dbContext.dbPaths[0]);
 
                 // checa se o vetor atual tem tamanho menor q o novo indice do aluno
@@ -185,9 +196,11 @@ namespace aed2_trabalho.Repositories
                 // escreve os dados do vetor com tamanho atualizado e no indice q estavam antes
                 File.WriteAllLines(_dbContext.dbPaths[0], lines);
 
+                // se der tudo certo, retorna true (salvou o arquivo)
                 return true;
             }
 
+            // se deu algum problema, retorna o problema, q vai ser debuggado
             catch (Exception ex)
             {
                 Console.WriteLine(ex);
