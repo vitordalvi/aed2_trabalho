@@ -1,5 +1,4 @@
 ﻿using aed2_trabalho.Controllers;
-using aed2_trabalho.Services;
 
 namespace aed2_trabalho.View
 {

@@ -84,55 +84,5 @@ namespace aed2_trabalho.Data
             }
         }
 
-
-
-        public bool AddMatricula(Matriculas matricula)
-        {
-            try
-            {
-                if (NUMEROS_MATRICULAS >= matriculas.Length)
-                {
-                    throw new Exception("Limite de matrículas atingido.");
-                }
-                matriculas[NUMEROS_MATRICULAS] = matricula;
-                NUMEROS_MATRICULAS++;
-                string linha = $"{matricula.GetMatriculaAluno()};{matricula.GetCodigoDisciplina()}" +
-                    $";{matricula.GetNota1()};{matricula.GetNota2()}";
-                File.AppendAllText(dbPaths[2], linha + Environment.NewLine);
-
-                return true;
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return false;
-            }
-        }
-        public bool AddDisciplina(Disciplinas disciplina)
-        {
-            try
-            {
-                if (NUMEROS_DISCIPLINAS >= disciplinas.Length)
-                {
-                    throw new Exception("Limite de disciplinas atingido.");
-                }
-
-                disciplinas[NUMEROS_DISCIPLINAS] = disciplina;
-                NUMEROS_DISCIPLINAS++;
-
-                string linha = $"{disciplina.GetCodigoDisciplina()};{disciplina.GetNomeDisciplina()};{
-                    disciplina.GetNotaMinima()}";
-                File.AppendAllText(dbPaths[3], linha + Environment.NewLine);
-
-                return true;
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-                return false;
-            }
-        }
-
     }
 }
