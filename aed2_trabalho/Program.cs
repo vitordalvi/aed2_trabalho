@@ -19,7 +19,7 @@
             // Repositorios
             IAlunoRepository alunosRepository = new AlunoRepository(dbContext);
             IDisciplinasRepository disciplinasRepository = new DisciplinasRepository(dbContext);
-            IMatriculasRepository matriculasRepository = new MatriculasRepository(dbContext);
+            IMatriculasRepository matriculasRepository = new MatriculasRepository(dbContext, alunosRepository);
 
             // Services
             AlunosService alunosService = new AlunosService(alunosRepository);
