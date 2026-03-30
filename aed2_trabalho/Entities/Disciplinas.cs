@@ -59,7 +59,7 @@ namespace aed2_trabalho.entities
             NotaMinima = notaMinima;
         }
 
-        public void DisciplinaIndex(int disciplinaIndex)
+        public void SetDisciplinaIndex(int disciplinaIndex)
         {
             this.disciplinaIndex = disciplinaIndex;
         }
