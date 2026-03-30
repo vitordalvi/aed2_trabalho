@@ -9,16 +9,13 @@ namespace aed2_trabalho.entities
         private string NomeDisciplina;
         private double NotaMinima;
 
-        int disciplinaInicial = 1;
+        private int disciplinaIndex;
 
         // Construtor para criação de novos objetos, com ID automatico
         public Disciplinas(string nomeDisciplina, double notaMinima)
         {
-            CodigoDisciplina += disciplinaInicial + 1;
             NomeDisciplina = nomeDisciplina;
             NotaMinima = notaMinima;
-
-            disciplinaInicial++;
         }
 
         // Construtor para leitura no arquivo, com ID atribuido
@@ -47,6 +44,11 @@ namespace aed2_trabalho.entities
             return NotaMinima;
         }
 
+        public int GetDisciplinaIndex()
+        {
+            return disciplinaIndex;
+        }
+
         public void SetNomeDisciplina(string nome)
         {
             NomeDisciplina = nome;
@@ -55,6 +57,11 @@ namespace aed2_trabalho.entities
         public void SetNotaMinima(double notaMinima)
         {
             NotaMinima = notaMinima;
+        }
+
+        public void DisciplinaIndex(int disciplinaIndex)
+        {
+            this.disciplinaIndex = disciplinaIndex;
         }
     }
 }
