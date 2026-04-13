@@ -14,6 +14,26 @@
             return Console.ReadLine();
         }
 
+        public string Salvar()
+        {
+            while (true)
+            {
+                Console.Write("Insira (S) para salvar alterações e (N) para ignorar: ");
+                string op = Console.ReadLine().ToLowerInvariant();
 
+                if (op == null)
+                {
+                    Console.Write("O valor não pode ser vazio, tente novamente: ");
+                }
+
+                if (op == "s" || op == "n")
+                {
+                    return op;
+                }
+
+                Console.Write("Insira uma opção válida: (S) ou (N): ");
+            }
+
+        }
     }
 }

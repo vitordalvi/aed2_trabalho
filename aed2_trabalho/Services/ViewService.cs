@@ -65,10 +65,10 @@ namespace aed2_trabalho.Services
                     _disciplinasView.ConsultarTodasDisciplinas();
                     break;
                 case "3":
-                    _disciplinasView.ConsultaAlunosDisciplina();
+                    _matriculasView.ConsultaAlunosDisciplina();
                     break;
                 case "4":
-                    _alunosView.ConsultarDisciplinasAluno();
+                    _matriculasView.ConsultaDisciplinasAluno();
                     break;
                 default:
                     Console.WriteLine("Opção de consulta inválida.");
@@ -90,7 +90,7 @@ namespace aed2_trabalho.Services
                     _matriculasView.CadastroMatricula();
                     break;
                 case "4":
-                    _alunosView.AtribuirNotaAluno();
+                    _matriculasView.AtribuirNotaAluno();
                     break;
                 default:
                     Console.WriteLine("Opção de cadastro inválida.");

@@ -8,6 +8,7 @@ namespace aed2_trabalho.Repositories
         public Alunos AddAluno(string nome, int idade);
         //public bool DeleteAluno(int matricula);
         public Alunos GetAlunoByMatricula(int matricula);
+        public Alunos[] GetAlunosByName(string nome);
         public Alunos[] GetAllAlunos();
         public bool Save(Alunos aluno);
     }

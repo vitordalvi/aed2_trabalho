@@ -74,7 +74,37 @@ namespace aed2_trabalho.Data
 
                             // Mesma lógica
                         case "Matriculas":
-                            Matriculas matricula = new Matriculas(int.Parse(data[0]), int.Parse(data[1]), double.Parse(data[2]), double.Parse(data[3]));
+                            if (data.Length < 5)
+                            {
+                                break;
+                            }
+
+                            if (!int.TryParse(data[0], out int codigoMatricula))
+                            {
+                                break;
+                            }
+
+                            if (!int.TryParse(data[1], out int codigoDisciplina))
+                            {
+                                break;
+                            }
+
+                            if (!int.TryParse(data[2], out int matriculaAluno))
+                            {
+                                break;
+                            }
+
+                            if (!double.TryParse([3], out double nota1))
+                            {
+                                break;
+                            }
+
+                            if (!double.TryParse(data[4], out double nota2))
+                            {
+                                break;
+                            }
+                                               
+                            Matriculas matricula = new Matriculas(codigoMatricula, codigoDisciplina, matriculaAluno, nota1, nota2);
                             matriculas[NUMEROS_MATRICULAS] = matricula;
                             NUMEROS_MATRICULAS++;
                             TOTAL_MATRICULAS++;

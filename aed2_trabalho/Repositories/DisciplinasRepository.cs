@@ -1,5 +1,6 @@
 ﻿using aed2_trabalho.Data;
 using aed2_trabalho.entities;
+using aed2_trabalho.Entities;
 
 namespace aed2_trabalho.Repositories
 {
@@ -35,57 +36,15 @@ namespace aed2_trabalho.Repositories
                         return disciplina;
                     }
                 }
+                return null;
             }
 
             // se deu errado, pega a exception
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex);
+                return null;
             }
 
-            // retorna a exception
-            throw new Exception("Disciplina não encontrada pelo código.");
-        }
-
-        // retorna todas as disciplinas
-        public Disciplinas[] GetAllDisciplinas()
-        {
-            try
-            {
-                // le as linhas do arquivo
-                string[] lines = File.ReadAllLines(_dbContext.dbPaths[2]);
-                // salva um vetor de disciplinas com o tamanho = quantidade linhas do arquivo
-                Disciplinas[] disciplinas = new Disciplinas[lines.Length];
-
-                // passa por todas as linhas
-                for (int i = 0; i < lines.Length; i++)
-                {
-                    // caso a linha do arquivo esteja vazia ou nula, retorna exception
-                    if (string.IsNullOrEmpty(lines[i]))
-                    {
-                        throw new Exception($"O índice {i} do arquivo {_dbContext.dbPaths[2]} está vazio ou é nulo.");
-                    }
-
-                    // separa os dados da linha por ;
-                    string[] data = lines[i].Split(';');
-
-                    // para cada linha, cria um objeto na posição correta
-                    for (int j = 0; j < data.Length; j++)
-                    {
-                        Disciplinas disciplina = new Disciplinas(int.Parse(data[0]), data[1], double.Parse(data[2]));
-                        disciplinas[i] = disciplina;
-                    }
-                }
-
-                // retorna o vetor das disciplinas já preenchido
-                return disciplinas;
-            }
-
-            // se houve uma falha, retorna a exception para debuggar
-            catch (Exception ex)
-            {
-                throw new Exception($"Falha ao consultar todas as disciplinas.");
-            }
         }
 
         // Método para adicionar disciplina
@@ -115,6 +74,119 @@ namespace aed2_trabalho.Repositories
             {
                 throw new Exception("Houve uma falha ao adicionar disciplina.");
             }
+        }
+
+        public Disciplinas[] GetAllDisciplinas()
+        {
+            try
+            {
+                string[] lines = File.ReadAllLines(_dbContext.dbPaths[2]);
+                Disciplinas[] disciplinas = new Disciplinas[lines.Length];
+
+                // passa por todas as linhas do arquivo
+                for (int i = 0; i < lines.Length; i++)
+                {
+                    // se algum indice for vazio, possivelmente pode dar um problema para a ordem
+                    if (string.IsNullOrEmpty(lines[i]))
+                    {
+                        // entao retorna uma exception para resolução do problema, aí tem que ver pq ficou nulo mas acho que nao vai acontecer
+                        throw new Exception($"O índice {i} do arquivo {_dbContext.dbPaths[2]} está vazio ou é nulo.");
+                    }
+
+                    // vetor par armazenar os dados separados por ;
+                    string[] data = lines[i].Split(';');
+
+                    // cria um novo aluno de acordo com o tamanho do arquivo e posiciona os atributos na posição correta
+                    for (int j = 0; j < data.Length; j++)
+                    {
+                        Disciplinas disciplina = new Disciplinas(int.Parse(data[0]), data[1], double.Parse(data[2]));
+                        disciplinas[i] = disciplina;
+                    }
+                }
+
+                // retorna o vetor contendo todos as disciplinas
+                return disciplinas;
+            }
+
+            catch (Exception ex)
+            {
+                throw new Exception("Falha ao consultar todas as disciplinas.");
+            }
+        }
+
+        public Disciplinas[] GetDisciplinasByName(string nome)
+        {
+            // Se o nome for vazio, retorna o vetor disciplinas vazio
+            if (string.IsNullOrWhiteSpace(nome))
+            {
+                return new Disciplinas[0];
+            }
+
+            // retira espaços do final do nome
+            string param = nome.Trim();
+
+            // armazena as linhas do arquivo Disciplinas.dat em um vetor
+            string[] lines = File.ReadAllLines(_dbContext.dbPaths[2]);
+
+            // contagem inicial da quantidade de nomes (iguais)
+            int count = 0;
+
+            // percorre o vetor de linhas
+            for (int i = 0; i < lines.Length; i++)
+            {
+                // se a linha na posicao i for vazia ou nula, continua, mas evitar erro de linhas "fantasmas"
+                if (string.IsNullOrEmpty(lines[i]))
+                {
+                    continue;
+                }
+
+                // vetor para as colunas
+                string[] data = lines[i].Split(';');
+
+                // se o tamanho da coluna for menor q 3 (id(0), nome(1), idade(2)
+                if (data.Length >= 3)
+                {
+                    // se a coluna 1 (nome) == nome.trim, compara ignorando letras maiusculas
+                    if (string.Equals(data[1].Trim(), param, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // aumenta a contagem (mesmos nomes encontrados)
+                        count++;
+                    }
+                }
+            }
+
+            // cria o vetor de disciplinas com a quantidade de disciplinas que tem o nome igual
+            Disciplinas[] encontrados = new Disciplinas[count];
+
+            // anota o indice de disciplinas encontrados
+            int index = 0;
+
+            // percorre as linhas do arquivo 
+            for (int i = 0; i < lines.Length; i++)
+            {
+                // se a linha for nula ou vazia, não atrapalha no for para contagem
+                if (string.IsNullOrWhiteSpace(lines[i]))
+                {
+                    continue;
+                }
+
+                // armazena as colunas separadas pelo ;
+                string[] data = lines[i].Split(';');
+
+                if (data.Length >= 3)
+                {
+                    // valida se o nome no arquivo.trim() é == nome(parametro).trim() e ignora letras maiusculas
+                    // se data[0](matricula) for numero, retorna o cod como inteiro e o mesmo para nota minima
+                    if (string.Equals(data[1].Trim(), param, StringComparison.OrdinalIgnoreCase) &&
+                        int.TryParse(data[0], out int numeroDisciplina) && double.TryParse(data[2], out double notaMinima))
+                    {
+                        // objeto das disciplinas encontrados (mesmo nome) retorna como vetor de disciplinas
+                        encontrados[index++] = new Disciplinas(numeroDisciplina, data[1].Trim(), notaMinima);
+                    }
+                }
+            }
+
+            return encontrados;
         }
 
         // Salvar as disciplinas no arquivo

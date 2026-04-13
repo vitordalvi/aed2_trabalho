@@ -92,7 +92,7 @@ namespace aed2_trabalho.View
                 string nome = alunos[i].GetNome();
                 int idade = alunos[i].GetIdade();
 
-                Console.WriteLine($"{matricula}, {nome}, {idade}.");
+                Console.WriteLine($"Matrícula: {matricula}, Nome: {nome}, Idade: {idade}.");
             }
 
             string repeatOption = ExitOption();

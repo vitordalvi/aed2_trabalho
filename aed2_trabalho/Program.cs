@@ -19,12 +19,12 @@
             // Repositorios
             IAlunoRepository alunosRepository = new AlunoRepository(dbContext);
             IDisciplinasRepository disciplinasRepository = new DisciplinasRepository(dbContext);
-            IMatriculasRepository matriculasRepository = new MatriculasRepository(dbContext, alunosRepository);
+            IMatriculasRepository matriculasRepository = new MatriculasRepository(dbContext, alunosRepository, disciplinasRepository);
 
             // Services
             AlunosService alunosService = new AlunosService(alunosRepository);
             DisciplinasService disciplinasService = new DisciplinasService(disciplinasRepository);
-            MatriculasService matriculasService = new MatriculasService(matriculasRepository);
+            MatriculasService matriculasService = new MatriculasService(matriculasRepository, alunosRepository, disciplinasRepository);
 
             // Controllers
             AlunosController alunosController = new AlunosController(alunosService);

@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using System.Reflection.Metadata.Ecma335;
 using aed2_trabalho.Data;
 using aed2_trabalho.Entities;
 
@@ -36,11 +37,12 @@ namespace aed2_trabalho.Repositories
                         return aluno;
                     }
                 }
-                // Caso deu problema na validação, retorna a exception
+
+                return null;
             }
-            catch (Exception ex)
+            catch
             {
-                Console.WriteLine(ex);
+                return null;
             }
 
             // Não conseguiu achar um aluno, por algum problema, da a exception pra eu debuggar
@@ -115,6 +117,82 @@ namespace aed2_trabalho.Repositories
             {
                 throw new Exception("Houve uma falha ao tentar adicionar o aluno.");
             }
+        }
+
+        public Alunos[] GetAlunosByName(string nome)
+        {
+            // Se o nome for vazio, retorna o vetor alunos vazio
+            if (string.IsNullOrWhiteSpace(nome))
+            {
+                return new Alunos[0];
+            }
+
+            // retira espaços do final do nome
+            string param = nome.Trim();
+
+            // armazena as linhas do arquivo Alunos.dat em um vetor
+            string[] lines = File.ReadAllLines(_dbContext.dbPaths[0]);
+
+            // contagem inicial da quantidade de nomes (iguais)
+            int count = 0;
+            
+            // percorre o vetor de linhas
+            for (int i = 0; i < lines.Length; i++)
+            {
+                // se a linha na posicao i for vazia ou nula, continua, mas evitar erro de linhas "fantasmas"
+                if (string.IsNullOrEmpty(lines[i]))
+                {
+                    continue;
+                }
+
+                // vetor para as colunas
+                string[] data = lines[i].Split(';');
+
+                // se o tamanho da coluna for menor q 3 (id(0), nome(1), idade(2)
+                if (data.Length >= 3)
+                {
+                    // se a coluna 1 (nome) == nome.trim, compara ignorando letras maiusculas
+                    if (string.Equals(data[1].Trim(), param, StringComparison.OrdinalIgnoreCase))
+                    {
+                        // aumenta a contagem (mesmos nomes encontrados)
+                        count++;
+                    }
+                }
+            }
+
+            // cria o vetor de alunos com a quantidade de alunos que tem o nome igual
+            Alunos[] encontrados = new Alunos[count];
+
+            // anota o indice de alunos encontrados
+            int index = 0;
+
+            // percorre as linhas do arquivo 
+            for (int i = 0; i < lines.Length; i++)
+            {
+                // se a linha for nula ou vazia, não atrapalha no for para contagem
+                if (string.IsNullOrWhiteSpace(lines[i]))
+                {
+                    continue;
+                }
+
+                // armazena as colunas separadas pelo ;
+                string[] data = lines[i].Split(';');
+
+                // se o tamanho da coluna for menor q 3 (matricula, nome, idade == [2])
+                if (data.Length >= 3)
+                {
+                    // valida se o nome no arquivo.trim() é == nome(parametro).trim() e ignora letras maiusculas
+                    // se data[0](matricula) for numero, retorna a matricula como inteiro e o mesmo para idade
+                    if (string.Equals(data[1].Trim(), param, StringComparison.OrdinalIgnoreCase) &&
+                        int.TryParse(data[0], out int matricula) && int.TryParse(data[2], out int idade))
+                    {
+                        // objeto dos alunos encontrados (mesmo nome) retorna como vetor de alunos
+                        encontrados[index++] = new Alunos(matricula, data[1].Trim(), idade);
+                    }
+                }
+            }
+
+            return encontrados;
         }
 
         // Método para remover um aluno
