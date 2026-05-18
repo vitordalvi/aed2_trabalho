@@ -47,5 +47,4 @@ Sem uso de banco de dados, utilizando **arquivos `.dat` e estruturas de dados**.
 ## Tecnologias
 
 - C#
-- .NET
 - Programação Orientada a Objetos (POO)
